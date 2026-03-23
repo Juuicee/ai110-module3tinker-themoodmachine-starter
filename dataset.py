@@ -23,6 +23,13 @@ POSITIVE_WORDS = [
     "chill",
     "relaxed",
     "amazing",
+
+    # Additional positive words - Added using co-pilot
+    "hopeful",
+    "proud",
+    "best",
+    "fire",
+    "wicked"
 ]
 
 NEGATIVE_WORDS = [
@@ -36,7 +43,22 @@ NEGATIVE_WORDS = [
     "stressed",
     "hate",
     "boring",
+
+    # Additional negative words - Added using co-pilot
+    "stressed",
+    "exhausted",
+    "meh"
 ]
+
+breakers = [
+    "I love getting stuck in traffic",
+    "This song is sick 🔥",
+    "I'm fine 🙂",
+    "I'm exhausted but proud of myself",
+    "That was wicked fun",
+]
+
+# At first wicked was coming up as mixed but was fixed to be positive!
 
 # ---------------------------------------------------------------------
 # Starter labeled dataset
