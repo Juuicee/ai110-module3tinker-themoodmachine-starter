@@ -50,6 +50,16 @@ SAMPLE_POSTS = [
     "This is fine",
     "So excited for the weekend",
     "I am not happy about this",
+
+    # Additional posts - Added using co-pilot
+    "Lowkey stressed about exams but I think I'll be okay",
+    "That movie was so bad 💀",
+    "I'm fine... just tired I guess",
+    "Best day ever 😂",
+    "I love getting ignored, it's awesome",
+    "Kinda happy kinda confused rn",
+    "This weather got me in a good mood :)",
+    "ugh everything is just meh today"
 ]
 
 # Human labels for each post above.
@@ -65,7 +75,19 @@ TRUE_LABELS = [
     "neutral",   # "This is fine"
     "positive",  # "So excited for the weekend"
     "negative",  # "I am not happy about this"
+
+    # Additional labels for the new posts - Added using co-pilot
+    "mixed",     # "Lowkey stressed about exams but I think I'll be okay"
+    "negative",  # "That movie was so bad 💀"
+    "neutral",   # "I'm fine... just tired I guess"
+    "positive",  # "Best day ever 😂"
+    "negative",  # "I love getting ignored, it's awesome"
+    "mixed",     # "Kinda happy kinda confused rn"
+    "positive",  # "This weather got me in a good mood :)"
+    "neutral"    # "ugh everything is just meh today"
 ]
+
+len(SAMPLE_POSTS) == len(TRUE_LABELS) # This should always be True - make sure to keep the lists aligned! - Added from Instructions.
 
 # TODO: Add 5-10 more posts and labels.
 #
