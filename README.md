@@ -1,3 +1,7 @@
+## Summary of Activity
+
+Students will need to understand how words, slang, and context contribute to sentiment and how rule-based or machine learning approaches can approximate human mood classification. Students will most likely struggle with with ambiguous posts, sarcasm, mixed emotions, and deciding how to label edge cases consistently. AI was helpful for suggesting preprocessing steps, scoring rules, and new dataset examples, but could be misleading if it ignored subtle emotions or context. One way I would guide a student without giving them the answer for the activity would be to encourage them to test “breaker” sentences and observe which words or symbols influence the model’s decision to reason about tradeoffs.
+
 # The Mood Machine
 
 The Mood Machine is a simple text classifier that begins with a rule based approach and can optionally be extended with a small machine learning model. It tries to guess whether a short piece of text sounds **positive**, **negative**, **neutral**, or even **mixed** based on patterns in your data.
