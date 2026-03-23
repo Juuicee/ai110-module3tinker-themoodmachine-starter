@@ -9,6 +9,8 @@ This class starts with very simple logic:
   - Convert that score into a mood label
 """
 
+from pydoc import text
+import string
 from typing import List, Dict, Tuple, Optional
 
 from dataset import POSITIVE_WORDS, NEGATIVE_WORDS
@@ -53,9 +55,16 @@ class MoodAnalyzer:
           - Normalize repeated characters ("soooo" -> "soo")
         """
         cleaned = text.strip().lower()
+
+        # remove punctuation (keeps emojis)
+        for p in string.punctuation:
+          cleaned = cleaned.replace(p, "")
+        
         tokens = cleaned.split()
 
+        print("TOKENS:", tokens)  # debug
         return tokens
+    # Used co-pilot to add punctuation removal logic to the preprocess method, which iterates over all punctuation characters and removes them from the cleaned text before splitting into tokens. This helps to ensure that words followed by punctuation (like "happy!" or "sad,") are still recognized as "happy" and "sad" respectively.
 
     # ---------------------------------------------------------------------
     # Scoring logic
@@ -83,7 +92,32 @@ class MoodAnalyzer:
         #
         # Hint: if you implement negation, you may want to look at pairs of tokens,
         # like ("not", "happy") or ("never", "fun").
-        pass
+        tokens = self.preprocess(text)
+        score = 0
+        negate = False
+
+        for token in tokens:
+            if token == "not":
+                negate = True
+                continue
+
+            if token in self.positive_words:
+                if negate:
+                    score -= 1
+                else:
+                    score += 1
+
+            elif token in self.negative_words:
+                if negate:
+                    score += 1
+                else:
+                    score -= 1
+
+            negate = False  # reset after one word
+
+        print("SCORE:", score)  # debug
+        return score
+    # Used co-pilot to implement a simple negation handling logic where the presence of "not" before a positive word will decrease the score and before a negative word will increase the score, effectively flipping the sentiment of that word.  
 
     # ---------------------------------------------------------------------
     # Label prediction
@@ -110,7 +144,17 @@ class MoodAnalyzer:
         #   2. Return "positive" if the score is above 0.
         #   3. Return "negative" if the score is below 0.
         #   4. Return "neutral" otherwise.
-        pass
+        score = self.score_text(text)
+
+        if score >= 2:
+            return "positive"
+        elif score <= -2:
+            return "negative"
+        elif score == 0:
+            return "neutral"
+        else:
+            return "mixed"
+        # Used co-pilot to create predict_label method with a more complex thresholding logic to allow for a "mixed" label when the score is close to zero.
 
     # ---------------------------------------------------------------------
     # Explanations (optional but recommended)
