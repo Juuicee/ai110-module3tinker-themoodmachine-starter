@@ -13,20 +13,29 @@ You may complete this model card for whichever version you used, or compare both
 Describe whether you used the rule based model, the ML model, or both.  
 Example: “I used the rule based model only” or “I compared both models.”
 
+I compared using both models.
+
 **Intended purpose:**  
 What is this model trying to do?  
 Example: classify short text messages as moods like positive, negative, neutral, or mixed.
+
+The rule-based model uses token scoring, and negation rules, while the ML model trains a logistic regression classifier on a bag-of-words representation.
 
 **How it works (brief):**  
 For the rule based version, describe the scoring rules you created.  
 For the ML version, describe how training works at a high level (no math needed).
 
+Rule-based scoring rules: The rule-based model converts text into lowercase tokens, adds +1 for each positive word, subtracts -1 for each negative word, flips sentiment after negations,, and assigns “mixed” when conflicting signals appear near zero.
+
+ML version: The ML model converts text posts into numeric vectors using a bag-of-words representation and trains a logistic regression classifier to predict labels based on patterns learned from the dataset.
 
 
 ## 2. Data
 
 **Dataset description:**  
 Summarize how many posts are in `SAMPLE_POSTS` and how you added new ones.
+
+The dataset contains 14 short posts with slang, emojis, sarcasm, and mixed emotions, manually labeled as positive, negative, neutral, or mixed.
 
 **Labeling process:**  
 Explain how you chose labels for your new examples.  
@@ -55,6 +64,8 @@ Examples:
 - Emoji handling  
 - Threshold decisions for labels
 
+The rule-based model scores positive words +1, negative words -1, applies negation, and assigns mixed labels when scores conflict near zero, performing well on obvious sentiment but failing on sarcasm, subtlety, or unfamiliar slang.
+
 **Strengths of this approach:**  
 Where does it behave predictably or reasonably well?
 
@@ -67,6 +78,8 @@ Examples: sarcasm, subtlety, mixed moods, unfamiliar slang.
 **Features used:**  
 Describe the representation.  
 Example: “Bag of words using CountVectorizer.”
+
+The ML model uses a bag-of-words representation trained on SAMPLE_POSTS and TRUE_LABELS, automatically learning patterns but overfitting on small data and misclassifying rare words or punctuation differently from the rule-based model.
 
 **Training data:**  
 State that the model trained on `SAMPLE_POSTS` and `TRUE_LABELS`.
@@ -101,6 +114,8 @@ Examples:
 - It cannot detect sarcasm reliably  
 - It depends heavily on the words you chose or labeled
 
+The models are limited by small dataset size, inability to handle sarcasm or complex context, heavy reliance on word lists or labels, and testing only on short casual English posts.
+
 ## 7. Ethical Considerations
 
 Discuss any potential impacts of using mood detection in real applications.  
@@ -109,6 +124,8 @@ Examples:
 - Misclassifying a message expressing distress  
 - Misinterpreting mood for certain language communities  
 - Privacy considerations if analyzing personal messages
+
+Misclassifying posts could be harmful, slang or dialects may be misinterpreted, and the models should not be used for decision-making or sensitive applications involving personal messages.
 
 ## 8. Ideas for Improvement
 
@@ -121,3 +138,5 @@ Possible directions:
 - Use a small neural network or transformer model  
 - Improve the rule based scoring method  
 - Add a real test set instead of training accuracy only
+
+Future improvements include expanding the labeled dataset, using TF-IDF or embeddings, enhancing rule-based preprocessing, implementing neural or transformer models, adding a proper test set, and exploring sarcasm-aware sentiment analysis.

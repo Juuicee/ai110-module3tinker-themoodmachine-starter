@@ -136,3 +136,8 @@ len(SAMPLE_POSTS) == len(TRUE_LABELS) # This should always be True - make sure t
 #
 # Remember to keep them aligned:
 #   len(SAMPLE_POSTS) == len(TRUE_LABELS)
+
+
+# ["i", "love", "getting", "ignored", "its", "awesome"]
+# Came out to be positive The model misclassified this sentence because it relies on keyword matching. 
+# It identified “love” and “awesome” as positive signals, but failed to recognize sarcasm. This highlights a limitation of rule-based systems, which cannot understand context or tone.
